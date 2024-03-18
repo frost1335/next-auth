@@ -4,6 +4,7 @@ import authConfig from "@/auth.config";
 import {
     DEFAULT_LOGIN_REDIRECT,
     apiAuthPrefix,
+    authRedirectRoutes,
     authRoutes,
     publicRoutes
 } from '@/routes'
@@ -16,6 +17,12 @@ export default auth((req) => {
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+    const isAuthRedirect = authRedirectRoutes.includes(nextUrl.pathname)
+
+    // auth redirect to login page to fix bug related to provider failure redirect
+    if (isAuthRedirect) {
+        return Response.redirect(new URL(`/auth/login?error=${nextUrl.searchParams.get('error')}`, nextUrl))
+    }
 
     if (isApiAuthRoute) {
         return

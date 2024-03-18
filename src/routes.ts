@@ -15,6 +15,7 @@ export const publicRoutes = [
 export const authRoutes = [
     '/auth/login',
     '/auth/register',
+    '/auth/error'
 ]
 
 /** 
@@ -29,3 +30,12 @@ The default redirect path after logging in
 @type {string}
 */
 export const DEFAULT_LOGIN_REDIRECT = '/settings'
+
+/**
+Authentication redirect routes apllied when next-auth redirects from providers
+@type {string[]}
+*/
+export const authRedirectRoutes = [
+    '/api/auth/auth/error',
+    '/api/auth/auth/login'
+]
