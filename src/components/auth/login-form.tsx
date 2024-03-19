@@ -40,8 +40,7 @@ export default function LoginForm() {
         startTransition(() => {
             login(values).then(data => {
                 setError(data?.error)
-                // TODO: Add when we add 2FA
-                // setSuccess(data?.success)
+                setSuccess(data?.success)
             }).catch()
         })
     }
@@ -94,8 +93,8 @@ export default function LoginForm() {
                                 </FormItem>
                             )} />
                     </div>
-                    <FormError message={error || urlError} />
                     <FormSuccess message={success} />
+                    <FormError message={error || urlError} />
                     <Button
                         type='submit'
                         className='w-full'>
